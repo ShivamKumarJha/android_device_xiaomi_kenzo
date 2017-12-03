@@ -35,8 +35,34 @@ TARGET_KERNEL_CONFIG := lineageos_kenzo_defconfig
 # Properties
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
 
+# TWRP specific build flags
+TW_THEME := portrait_hdpi
+RECOVERY_SDCARD_ON_DATA := true
+TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
+TARGET_RECOVERY_QCOM_RTC_FIX := true
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun0/file
+TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
+TW_DEFAULT_BRIGHTNESS := 80
+TW_DEFAULT_EXTERNAL_STORAGE := true
+TW_EXCLUDE_SUPERSU := true
+TW_INCLUDE_NTFS_3G := true
+TW_IGNORE_MISC_WIPE_DATA := true
+TARGET_RECOVERY_DEVICE_DIRS += $(DEVICE_PATH)/twrp
+WITH_TWRP := true
+
+# Asian region languages
+TW_EXTRA_LANGUAGES := true
+
+# Encryption support
+TW_INCLUDE_CRYPTO := true
+TARGET_HW_DISK_ENCRYPTION := true
+TARGET_KEYMASTER_WAIT_FOR_QSEE := true
+
+# Debug flags
+TWRP_INCLUDE_LOGCAT := true
+
 # Sepolicy
 BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
 
 # inherit from the proprietary version
--include vendor/xiaomi/kenzo/BoardConfigVendor.mk
+include vendor/xiaomi/kenzo/BoardConfigVendor.mk
